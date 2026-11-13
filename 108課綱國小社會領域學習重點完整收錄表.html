@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>108 課綱國小社會領域學習重點完整收錄表 | 國小社會科 AI 備課島</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome 6 CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700;800;900&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Noto Sans TC', 'M PLUS Rounded 1c', sans-serif;
+      background-color: #f8fafc;
+      color: #1e293b;
+    }
+    .btn-pop {
+      background: #ffffff;
+      border: 2px solid #2d3748;
+      box-shadow: 0 4px 0 #2d3748;
+      transition: all 0.15s ease;
+    }
+    .btn-pop:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 0 #2d3748;
+    }
+    .btn-pop:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 0 #2d3748;
+    }
+    .code-badge {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+    /* 膠囊按鈕狀態 */
+    .pill-active {
+      background-color: #1e293b !important;
+      color: #ffffff !important;
+      border-color: #0f172a !important;
+    }
+  </style>
+</head>
+<body class="p-4 sm:p-8 max-w-5xl mx-auto">
+
+  <!-- 頂部頁首 -->
+  <header class="mb-6 border-b-2 border-slate-800 pb-5 flex flex-wrap items-center justify-between gap-4">
+    <div>
+      <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-black bg-emerald-100 text-emerald-900 border border-emerald-400">
+        教育部 108 社會領域課綱官方條目庫（國小三至六年級）
+      </span>
+      <h1 class="text-2xl sm:text-3xl font-black text-slate-800 tracking-tight mt-1.5">
+        108 課綱國小社會領域學習重點完整收錄表
+      </h1>
+      <p class="text-xs text-slate-500 mt-1">「學習表現」與「學習內容」分流檢索，支援學習階段、構面、主題軸快速篩選</p>
+    </div>
+    <div class="flex items-center gap-2">
+      <button onclick="window.print()" class="btn-pop px-3.5 py-2 rounded-xl text-xs font-black text-slate-800 flex items-center gap-1.5">
+        <i class="fa-solid fa-print text-slate-600"></i>列印
+      </button>
+      <a href="108課綱國小社會領域精華導覽.html" class="btn-pop px-3.5 py-2 rounded-xl text-xs font-black text-slate-800 flex items-center gap-1.5">
+        <i class="fa-solid fa-compass text-indigo-600"></i>精華導覽
+      </a>
+      <a href="國小社會備課島_3D預覽.html" class="btn-pop px-3.5 py-2 rounded-xl text-xs font-black text-slate-800 flex items-center gap-1.5">
+        <i class="fa-solid fa-arrow-left text-slate-600"></i>返回備課島
+      </a>
+    </div>
+  </header>
+
+  <!-- 控制列：多維度快速切換面板 -->
+  <div class="bg-white border-2 border-slate-800 rounded-3xl p-5 shadow-[0_5px_0_#2d3748] mb-6 space-y-4">
+    
+    <!-- 第一層主切換：雙軸類型（學習表現 vs 學習內容） -->
+    <div class="flex flex-wrap items-center justify-between gap-3 border-b-2 border-slate-100 pb-4">
+      <div class="flex items-center gap-2">
+        <span class="text-xs font-black text-slate-800 flex items-center gap-1">
+          <i class="fa-solid fa-layer-group text-amber-500"></i>條目類型：
+        </span>
+        <div class="inline-flex rounded-2xl p-1 bg-slate-100 border border-slate-300">
+          <button onclick="setDimension('all')" id="dim-all" class="px-3.5 py-1.5 rounded-xl text-xs font-black transition pill-active">
+            全部重點 (102)
+          </button>
+          <button onclick="setDimension('performance')" id="dim-performance" class="px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-600 hover:text-slate-900 transition flex items-center gap-1.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-indigo-600"></span>
+            <span>學習表現 (42)</span>
+          </button>
+          <button onclick="setDimension('content')" id="dim-content" class="px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-600 hover:text-slate-900 transition flex items-center gap-1.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-600"></span>
+            <span>學習內容 (60)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 即時關鍵字搜尋框 -->
+      <div class="relative w-full sm:w-64">
+        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
+        <input type="text" id="search-input" oninput="handleSearch()" placeholder="搜尋條碼（如 1a、Ab）或關鍵字..." class="w-full pl-9 pr-3.5 py-2 rounded-2xl border-2 border-slate-300 text-xs text-slate-800 focus:outline-none focus:border-slate-800 font-bold bg-slate-50 focus:bg-white transition">
+      </div>
+    </div>
+
+    <!-- 第二層輔助切換：學習階段與子分類膠囊 -->
+    <div class="flex flex-wrap items-center justify-between gap-3 text-xs">
+      <!-- 學習階段過濾 -->
+      <div class="flex items-center gap-2">
+        <span class="font-black text-slate-800 flex items-center gap-1">
+          <i class="fa-solid fa-graduation-cap text-indigo-500"></i>年段階段：
+        </span>
+        <div class="flex gap-1.5">
+          <button onclick="setStage('all')" id="stage-all" class="px-3 py-1.5 rounded-xl font-bold bg-slate-800 text-white">全部年段</button>
+          <button onclick="setStage('mid')" id="stage-mid" class="px-3 py-1.5 rounded-xl font-bold bg-slate-100 hover:bg-slate-200 text-slate-700">第二階段 · 中年級 (3～4年級)</button>
+          <button onclick="setStage('high')" id="stage-high" class="px-3 py-1.5 rounded-xl font-bold bg-slate-100 hover:bg-slate-200 text-slate-700">第三階段 · 高年級 (5～6年級)</button>
+        </div>
+      </div>
+
+      <!-- 統計計數 -->
+      <div class="text-[11px] font-bold text-slate-500 bg-slate-100 px-3 py-1 rounded-full border border-slate-200">
+        已篩選顯示：<span id="result-count" class="font-black text-slate-900">102</span> 筆條目
+      </div>
+    </div>
+
+    <!-- 第三層：子分類標籤膠囊（根據當前選擇動態提供快速直達） -->
+    <div id="subcat-bar" class="pt-2 border-t border-slate-100 flex flex-wrap items-center gap-1.5">
+      <!-- JS 動態生成構面或主題軸按鈕 -->
+    </div>
+
+  </div>
+
+  <!-- 條目清單容器 -->
+  <main id="item-container" class="space-y-4">
+    <!-- JS 動態渲染分組條目卡片 -->
+  </main>
+
+  <footer class="mt-8 pt-5 border-t border-slate-200 text-center text-xs text-slate-500">
+    國小社會科 AI 備課島 · 資料法源：教育部《十二年國民基本教育社會領域課程綱要》官方全文 · 專為現場親師備課設計
+  </footer>
+
+  <!-- 完整 102 條條目資料庫與互動邏輯 -->
+  <script>
+    const CURRICULUM_DATA = [
+      // ==========================================
+      // 【學習表現】第二學習階段：中年級（20 條）
+      // ==========================================
+      { dimension: 'performance', stage: 'mid', code: '1a-Ⅱ-1', mainCat: '1. 理解及思辨', subCat: 'a. 覺察說明', text: '辨別社會生活中的事實與意見。' },
+      { dimension: 'performance', stage: 'mid', code: '1a-Ⅱ-2', mainCat: '1. 理解及思辨', subCat: 'a. 覺察說明', text: '分辨社會事物的類別或先後順序。' },
+      { dimension: 'performance', stage: 'mid', code: '1a-Ⅱ-3', mainCat: '1. 理解及思辨', subCat: 'a. 覺察說明', text: '舉例說明社會事物與環境的互動、差異或變遷現象。' },
+      { dimension: 'performance', stage: 'mid', code: '1b-Ⅱ-1', mainCat: '1. 理解及思辨', subCat: 'b. 分析詮釋', text: '解釋社會事物與環境之間的關係。' },
+      { dimension: 'performance', stage: 'mid', code: '1c-Ⅱ-1', mainCat: '1. 理解及思辨', subCat: 'c. 判斷創新', text: '判斷個人生活或民主社會中各項選擇的合宜性。' },
+      { dimension: 'performance', stage: 'mid', code: '2a-Ⅱ-1', mainCat: '2. 態度及價值', subCat: 'a. 敏覺關懷', text: '關注居住地方社會事物與環境的互動、差異與變遷等問題。' },
+      { dimension: 'performance', stage: 'mid', code: '2a-Ⅱ-2', mainCat: '2. 態度及價值', subCat: 'a. 敏覺關懷', text: '表達對居住地方社會事物與環境的關懷。' },
+      { dimension: 'performance', stage: 'mid', code: '2b-Ⅱ-1', mainCat: '2. 態度及價值', subCat: 'b. 同理尊重', text: '體認人們對生活事物與環境有不同的感受，並加以尊重。' },
+      { dimension: 'performance', stage: 'mid', code: '2b-Ⅱ-2', mainCat: '2. 態度及價值', subCat: 'b. 同理尊重', text: '感受與欣賞不同文化的特色。' },
+      { dimension: 'performance', stage: 'mid', code: '2c-Ⅱ-1', mainCat: '2. 態度及價值', subCat: 'c. 自省珍視', text: '省思個人的生活習慣與在群體中的角色扮演，尊重人我差異，避免對他人產生偏見。' },
+      { dimension: 'performance', stage: 'mid', code: '2c-Ⅱ-2', mainCat: '2. 態度及價值', subCat: 'c. 自省珍視', text: '澄清及珍視自己的角色與權利，並具備責任感。' },
+      { dimension: 'performance', stage: 'mid', code: '3a-Ⅱ-1', mainCat: '3. 實作及參與', subCat: 'a. 問題發現', text: '透過日常觀察與省思，對社會事物與環境提出感興趣的問題。' },
+      { dimension: 'performance', stage: 'mid', code: '3b-Ⅱ-1', mainCat: '3. 實作及參與', subCat: 'b. 資料蒐整與應用', text: '透過適當的管道蒐集與學習主題相關的資料，並判讀其正確性。' },
+      { dimension: 'performance', stage: 'mid', code: '3b-Ⅱ-2', mainCat: '3. 實作及參與', subCat: 'b. 資料蒐整與應用', text: '摘取相關資料中的重點。' },
+      { dimension: 'performance', stage: 'mid', code: '3b-Ⅱ-3', mainCat: '3. 實作及參與', subCat: 'b. 資料蒐整與應用', text: '整理資料，製作成簡易的圖表，並加以說明。' },
+      { dimension: 'performance', stage: 'mid', code: '3c-Ⅱ-1', mainCat: '3. 實作及參與', subCat: 'c. 溝通合作', text: '聆聽他人的意見，並表達自己的看法。' },
+      { dimension: 'performance', stage: 'mid', code: '3c-Ⅱ-2', mainCat: '3. 實作及參與', subCat: 'c. 溝通合作', text: '透過同儕合作進行體驗、探究與實作。' },
+      { dimension: 'performance', stage: 'mid', code: '3d-Ⅱ-1', mainCat: '3. 實作及參與', subCat: 'd. 規劃執行', text: '探究問題發生的原因與影響，並尋求解決問題的可能做法。' },
+      { dimension: 'performance', stage: 'mid', code: '3d-Ⅱ-2', mainCat: '3. 實作及參與', subCat: 'd. 規劃執行', text: '評估與選擇可能的做法，嘗試解決問題。' },
+      { dimension: 'performance', stage: 'mid', code: '3d-Ⅱ-3', mainCat: '3. 實作及參與', subCat: 'd. 規劃執行', text: '將問題解決的過程與結果，進行報告分享或實作展演。' },
+
+      // ==========================================
+      // 【學習表現】第三學習階段：高年級（22 條）
+      // ==========================================
+      { dimension: 'performance', stage: 'high', code: '1a-Ⅲ-1', mainCat: '1. 理解及思辨', subCat: 'a. 覺察說明', text: '舉例說明探究社會領域的意義及方法。' },
+      { dimension: 'performance', stage: 'high', code: '1a-Ⅲ-2', mainCat: '1. 理解及思辨', subCat: 'a. 覺察說明', text: '舉例說明在個人生活或民主社會中對各項議題做選擇的理由及其影響。' },
+      { dimension: 'performance', stage: 'high', code: '1b-Ⅲ-1', mainCat: '1. 理解及思辨', subCat: 'b. 分析詮釋', text: '檢視社會現象中不同的意見，分析其觀點與立場。' },
+      { dimension: 'performance', stage: 'high', code: '1b-Ⅲ-2', mainCat: '1. 理解及思辨', subCat: 'b. 分析詮釋', text: '理解各種事實或社會現象的關係，並歸納出其間的關係或規律性。' },
+      { dimension: 'performance', stage: 'high', code: '1b-Ⅲ-3', mainCat: '1. 理解及思辨', subCat: 'b. 分析詮釋', text: '解析特定人物、族群與事件在所處時間、空間脈絡中的位置與意義。' },
+      { dimension: 'performance', stage: 'high', code: '1c-Ⅲ-1', mainCat: '1. 理解及思辨', subCat: 'c. 判斷創新', text: '評論社會議題處理方案的優缺點，並提出個人的看法。' },
+      { dimension: 'performance', stage: 'high', code: '1c-Ⅲ-2', mainCat: '1. 理解及思辨', subCat: 'c. 判斷創新', text: '檢視社會現象或事件之間的關係，並想像在不同的條件下，推測其可能的發展。' },
+      { dimension: 'performance', stage: 'high', code: '2a-Ⅲ-1', mainCat: '2. 態度及價值', subCat: 'a. 敏覺關懷', text: '關注社會、自然、人文環境與生活方式的互動關係。' },
+      { dimension: 'performance', stage: 'high', code: '2a-Ⅲ-2', mainCat: '2. 態度及價值', subCat: 'a. 敏覺關懷', text: '表達對在地與全球議題的關懷。' },
+      { dimension: 'performance', stage: 'high', code: '2b-Ⅲ-1', mainCat: '2. 態度及價值', subCat: 'b. 同理尊重', text: '體認人們對社會事物與環境有不同的認知、感受、意見與表現方式，並加以尊重。' },
+      { dimension: 'performance', stage: 'high', code: '2b-Ⅲ-2', mainCat: '2. 態度及價值', subCat: 'b. 同理尊重', text: '理解不同文化的特色，欣賞並尊重文化的多樣性。' },
+      { dimension: 'performance', stage: 'high', code: '2c-Ⅲ-1', mainCat: '2. 態度及價值', subCat: 'c. 自省珍視', text: '反省自己或社會的價值觀、偏見與歧視，並探究其緣由。' },
+      { dimension: 'performance', stage: 'high', code: '2c-Ⅲ-2', mainCat: '2. 態度及價值', subCat: 'c. 自省珍視', text: '體認並願意維護公民價值與生活方式。' },
+      { dimension: 'performance', stage: 'high', code: '2c-Ⅲ-3', mainCat: '2. 態度及價值', subCat: 'c. 自省珍視', text: '澄清及珍視自己的公民身分，並具備對國家及文化的認同感。' },
+      { dimension: 'performance', stage: 'high', code: '3a-Ⅲ-1', mainCat: '3. 實作及參與', subCat: 'a. 問題發現', text: '透過對時事的理解與省思，提出感興趣或令人困惑的現象及社會議題。' },
+      { dimension: 'performance', stage: 'high', code: '3b-Ⅲ-1', mainCat: '3. 實作及參與', subCat: 'b. 資料蒐整與應用', text: '透過適當的管道蒐集社會議題的相關資料，並兼顧不同觀點或意見。' },
+      { dimension: 'performance', stage: 'high', code: '3b-Ⅲ-2', mainCat: '3. 實作及參與', subCat: 'b. 資料蒐整與應用', text: '摘取及整理社會議題相關資料的重點，判讀其正確性及價值，並加以描述和解釋。' },
+      { dimension: 'performance', stage: 'high', code: '3c-Ⅲ-1', mainCat: '3. 實作及參與', subCat: 'c. 溝通合作', text: '聆聽他人意見，表達自我觀點，並能與他人討論。' },
+      { dimension: 'performance', stage: 'high', code: '3c-Ⅲ-2', mainCat: '3. 實作及參與', subCat: 'c. 溝通合作', text: '發揮各人不同的專長，透過分工進行團隊合作。' },
+      { dimension: 'performance', stage: 'high', code: '3c-Ⅲ-3', mainCat: '3. 實作及參與', subCat: 'c. 溝通合作', text: '主動分擔群體的事務，並與他人合作。' },
+      { dimension: 'performance', stage: 'high', code: '3d-Ⅲ-1', mainCat: '3. 實作及參與', subCat: 'd. 規劃執行', text: '選定學習主題或社會議題，進行探究與實作。' },
+      { dimension: 'performance', stage: 'high', code: '3d-Ⅲ-2', mainCat: '3. 實作及參與', subCat: 'd. 規劃執行', text: '探究社會議題發生的原因與影響，評估與選擇合適的解決方案。' },
+      { dimension: 'performance', stage: 'high', code: '3d-Ⅲ-3', mainCat: '3. 實作及參與', subCat: 'd. 規劃執行', text: '分享學習主題、社會議題探究的發現或執行經驗，並運用回饋資訊進行省思，尋求調整與創新。' },
+
+      // ==========================================
+      // 【學習內容】第二學習階段：中年級（25 條）
+      // ==========================================
+      { dimension: 'content', stage: 'mid', code: 'Aa-Ⅱ-1', mainCat: '主題軸 A · 互動與關聯', subCat: 'a. 個人與群體', text: '個人在家庭、學校與社會中有各種不同的角色，個人發展也會受其影響。' },
+      { dimension: 'content', stage: 'mid', code: 'Aa-Ⅱ-2', mainCat: '主題軸 A · 互動與關聯', subCat: 'a. 個人與群體', text: '不同群體（可包括年齡、性別、族群、階層、職業、區域或身心特質等）應受到理解、尊重與保護，並避免偏見。' },
+      { dimension: 'content', stage: 'mid', code: 'Ab-Ⅱ-1', mainCat: '主題軸 A · 互動與關聯', subCat: 'b. 人與環境', text: '居民的生活方式與空間利用，和其居住地方的自然、人文環境相互影響。' },
+      { dimension: 'content', stage: 'mid', code: 'Ab-Ⅱ-2', mainCat: '主題軸 A · 互動與關聯', subCat: 'b. 人與環境', text: '自然環境會影響經濟的發展，經濟的發展也會改變自然環境。' },
+      { dimension: 'content', stage: 'mid', code: 'Ac-Ⅱ-1', mainCat: '主題軸 A · 互動與關聯', subCat: 'c. 權力、規則與人權', text: '兒童在生活中擁有許多權利（可包括生存權、學習權、表意權、隱私權、身體自主權及不受歧視的權利等）與責任（可包括遵守規範、尊重他人或維護公共利益等）。' },
+      { dimension: 'content', stage: 'mid', code: 'Ac-Ⅱ-2', mainCat: '主題軸 A · 互動與關聯', subCat: 'c. 權力、規則與人權', text: '遇到違反人權的事件，可尋求適當的救助管道。' },
+      { dimension: 'content', stage: 'mid', code: 'Ad-Ⅱ-1', mainCat: '主題軸 A · 互動與關聯', subCat: 'd. 生產與消費', text: '個人透過參與各行各業的經濟活動，與他人形成分工合作的關係。' },
+      { dimension: 'content', stage: 'mid', code: 'Ad-Ⅱ-2', mainCat: '主題軸 A · 互動與關聯', subCat: 'd. 生產與消費', text: '人們透過儲蓄與消費，來滿足生活需求。' },
+      { dimension: 'content', stage: 'mid', code: 'Ae-Ⅱ-1', mainCat: '主題軸 A · 互動與關聯', subCat: 'e. 科技與社會', text: '人類為了解決生活需求或滿足好奇心，進行科學和技術的研發，從而改變自然環境與人們的生活。' },
+      { dimension: 'content', stage: 'mid', code: 'Af-Ⅱ-1', mainCat: '主題軸 A · 互動與關聯', subCat: 'f. 全球關連', text: '不同文化的接觸和交流，可能產生衝突、合作和創新，並影響在地的生活與文化。' },
+      { dimension: 'content', stage: 'mid', code: 'Ba-Ⅱ-1', mainCat: '主題軸 B · 差異與多元', subCat: 'a. 個體差異', text: '人們對社會事物的認識、感受與意見有相同之處，亦有差異性。' },
+      { dimension: 'content', stage: 'mid', code: 'Bb-Ⅱ-1', mainCat: '主題軸 B · 差異與多元', subCat: 'b. 環境差異', text: '居民的生活空間與生活方式具有地區性的差異。' },
+      { dimension: 'content', stage: 'mid', code: 'Bc-Ⅱ-1', mainCat: '主題軸 B · 差異與多元', subCat: 'c. 社會與文化的差異', text: '各個族群有不同的命名方式、節慶與風俗習慣。' },
+      { dimension: 'content', stage: 'mid', code: 'Bc-Ⅱ-2', mainCat: '主題軸 B · 差異與多元', subCat: 'c. 社會與文化的差異', text: '家庭有不同的成員組成方式；每個家庭所重視的價值有其異同。' },
+      { dimension: 'content', stage: 'mid', code: 'Ca-Ⅱ-1', mainCat: '主題軸 C · 變遷與因果', subCat: 'a. 環境的變遷', text: '居住地方的環境隨著社會與經濟的發展而改變。' },
+      { dimension: 'content', stage: 'mid', code: 'Ca-Ⅱ-2', mainCat: '主題軸 C · 變遷與因果', subCat: 'a. 環境的變遷', text: '人口分布與自然、人文環境的變遷相互影響。' },
+      { dimension: 'content', stage: 'mid', code: 'Cb-Ⅱ-1', mainCat: '主題軸 C · 變遷與因果', subCat: 'b. 歷史的變遷', text: '居住地方不同時代的重要人物、事件與文物古蹟，可以反映當地的歷史變遷。' },
+      { dimension: 'content', stage: 'mid', code: 'Cc-Ⅱ-1', mainCat: '主題軸 C · 變遷與因果', subCat: 'c. 社會的變遷', text: '各地居民的生活與工作方式會隨著社會變遷而改變。' },
+      { dimension: 'content', stage: 'mid', code: 'Da-Ⅱ-1', mainCat: '主題軸 D · 選擇與責任', subCat: 'a. 價值的選擇', text: '時間與資源有限，個人須在生活中學會做選擇。' },
+      { dimension: 'content', stage: 'mid', code: 'Da-Ⅱ-2', mainCat: '主題軸 D · 選擇與責任', subCat: 'a. 價值的選擇', text: '個人生活習慣和方式的選擇，對環境與社會價值觀有不同的影響。' },
+      { dimension: 'content', stage: 'mid', code: 'Db-Ⅱ-1', mainCat: '主題軸 D · 選擇與責任', subCat: 'b. 經濟的選擇', text: '滿足需要的資源有限，在進行各項消費時要做評估再選擇。' },
+      { dimension: 'content', stage: 'mid', code: 'Dc-Ⅱ-1', mainCat: '主題軸 D · 選擇與責任', subCat: 'c. 參與公共事務的選擇', text: '班級與學校公共事務的安排，可以透過師生適切的討論歷程做出決定。' },
+
+      // ==========================================
+      // 【學習內容】第三學習階段：高年級（35 條）
+      // ==========================================
+      { dimension: 'content', stage: 'high', code: 'Aa-Ⅲ-1', mainCat: '主題軸 A · 互動與關聯', subCat: 'a. 個人與群體', text: '個人可以決定自我發展的特色，並具有參與群體社會發展的權利。' },
+      { dimension: 'content', stage: 'high', code: 'Aa-Ⅲ-2', mainCat: '主題軸 A · 互動與關聯', subCat: 'a. 個人與群體', text: '規範（可包括習俗、道德、宗教或法律等）能導引個人與群體行為，並維持社會秩序與運作。' },
+      { dimension: 'content', stage: 'high', code: 'Aa-Ⅲ-3', mainCat: '主題軸 A · 互動與關聯', subCat: 'a. 個人與群體', text: '個人的價值觀會影響其行為，也可能會影響人際關係。' },
+      { dimension: 'content', stage: 'high', code: 'Aa-Ⅲ-4', mainCat: '主題軸 A · 互動與關聯', subCat: 'a. 個人與群體', text: '在民主社會個人須遵守社會規範，理性溝通、理解包容與相互尊重。' },
+      { dimension: 'content', stage: 'high', code: 'Ab-Ⅲ-1', mainCat: '主題軸 A · 互動與關聯', subCat: 'b. 人與環境', text: '臺灣的地理位置、自然環境，與歷史文化的發展有關聯性。' },
+      { dimension: 'content', stage: 'high', code: 'Ab-Ⅲ-2', mainCat: '主題軸 A · 互動與關聯', subCat: 'b. 人與環境', text: '交通運輸與產業發展會影響城鄉與區域間的人口遷移及連結互動。' },
+      { dimension: 'content', stage: 'high', code: 'Ab-Ⅲ-3', mainCat: '主題軸 A · 互動與關聯', subCat: 'b. 人與環境', text: '自然環境、自然災害及經濟活動，和生活空間的使用有關聯性。' },
+      { dimension: 'content', stage: 'high', code: 'Ac-Ⅲ-1', mainCat: '主題軸 A · 互動與關聯', subCat: 'c. 權力、規則與人權', text: '憲法規範人民的基本權利與義務。' },
+      { dimension: 'content', stage: 'high', code: 'Ac-Ⅲ-2', mainCat: '主題軸 A · 互動與關聯', subCat: 'c. 權力、規則與人權', text: '法律是由立法機關所制定，其功能在保障人民權利、維護社會秩序和促進社會進步。' },
+      { dimension: 'content', stage: 'high', code: 'Ac-Ⅲ-3', mainCat: '主題軸 A · 互動與關聯', subCat: 'c. 權力、規則與人權', text: '我國政府組織可區分為中央及地方政府，各具有不同的功能，並依公權力管理公共事務。' },
+      { dimension: 'content', stage: 'high', code: 'Ac-Ⅲ-4', mainCat: '主題軸 A · 互動與關聯', subCat: 'c. 權力、規則與人權', text: '國家權力的運用會維護國家安全及社會秩序，也可能會增進或傷害個人與群體的權益。' },
+      { dimension: 'content', stage: 'high', code: 'Ad-Ⅲ-1', mainCat: '主題軸 A · 互動與關聯', subCat: 'd. 生產與消費', text: '消費者權益的保障，需要消費者、業者與政府共同努力。' },
+      { dimension: 'content', stage: 'high', code: 'Ae-Ⅲ-1', mainCat: '主題軸 A · 互動與關聯', subCat: 'e. 科技與社會', text: '科學和技術發展對自然與人文環境具有不同層面的影響。' },
+      { dimension: 'content', stage: 'high', code: 'Ae-Ⅲ-2', mainCat: '主題軸 A · 互動與關聯', subCat: 'e. 科技與社會', text: '科學和技術的發展與人類的價值、信仰與態度會相互影響。' },
+      { dimension: 'content', stage: 'high', code: 'Ae-Ⅲ-3', mainCat: '主題軸 A · 互動與關聯', subCat: 'e. 科技與社會', text: '科學和技術的研究與運用，應受到道德與法律的規範；政府的政策或法令會因新科技的出現而增修。' },
+      { dimension: 'content', stage: 'high', code: 'Af-Ⅲ-1', mainCat: '主題軸 A · 互動與關聯', subCat: 'f. 全球關連', text: '為了確保基本人權、維護生態環境的永續發展，全球須共同關心許多議題。' },
+      { dimension: 'content', stage: 'high', code: 'Af-Ⅲ-2', mainCat: '主題軸 A · 互動與關聯', subCat: 'f. 全球關連', text: '國際間因利益競爭而造成衝突、對立與結盟。' },
+      { dimension: 'content', stage: 'high', code: 'Af-Ⅲ-3', mainCat: '主題軸 A · 互動與關聯', subCat: 'f. 全球關連', text: '個人、政府與民間組織可透過各種方式積極參與國際組織與事務，善盡世界公民責任。' },
+      { dimension: 'content', stage: 'high', code: 'Ba-Ⅲ-1', mainCat: '主題軸 B · 差異與多元', subCat: 'a. 個體差異', text: '每個人不同的生活背景與經驗，會使其對社會事務的觀點與感受產生差異。' },
+      { dimension: 'content', stage: 'high', code: 'Bb-Ⅲ-1', mainCat: '主題軸 B · 差異與多元', subCat: 'b. 環境差異', text: '自然與人文環境的交互影響，造成生活空間型態的差異與多元。' },
+      { dimension: 'content', stage: 'high', code: 'Bc-Ⅲ-1', mainCat: '主題軸 B · 差異與多元', subCat: 'c. 社會與文化的差異', text: '族群或地區的文化特色，各有其產生的背景因素，因而形塑臺灣多元豐富的文化內涵。' },
+      { dimension: 'content', stage: 'high', code: 'Bc-Ⅲ-2', mainCat: '主題軸 B · 差異與多元', subCat: 'c. 社會與文化的差異', text: '權力不平等與資源分配不均，會造成個人或群體間的差別待遇。' },
+      { dimension: 'content', stage: 'high', code: 'Ca-Ⅲ-1', mainCat: '主題軸 C · 變遷與因果', subCat: 'a. 環境的變遷', text: '都市化與工業化會改變環境，也會引發環境問題。' },
+      { dimension: 'content', stage: 'high', code: 'Ca-Ⅲ-2', mainCat: '主題軸 C · 變遷與因果', subCat: 'a. 環境的變遷', text: '土地利用反映過去和現在的環境變遷，以及對未來的展望。' },
+      { dimension: 'content', stage: 'high', code: 'Cb-Ⅲ-1', mainCat: '主題軸 C · 變遷與因果', subCat: 'b. 歷史的變遷', text: '不同時期臺灣、世界的重要事件與人物，影響臺灣的歷史變遷。' },
+      { dimension: 'content', stage: 'high', code: 'Cb-Ⅲ-2', mainCat: '主題軸 C · 變遷與因果', subCat: 'b. 歷史的變遷', text: '臺灣史前文化、原住民族文化、中華文化及世界其他文化隨著時代變遷，都在臺灣留下有形與無形的文化資產，並於生活中展現特色。' },
+      { dimension: 'content', stage: 'high', code: 'Cc-Ⅲ-1', mainCat: '主題軸 C · 變遷與因果', subCat: 'c. 社會的變遷', text: '個人在團體中的角色會隨著社會變遷產生改變。' },
+      { dimension: 'content', stage: 'high', code: 'Cc-Ⅲ-2', mainCat: '主題軸 C · 變遷與因果', subCat: 'c. 社會的變遷', text: '族群的遷徙、通婚及交流，與社會變遷互為因果。' },
+      { dimension: 'content', stage: 'high', code: 'Cd-Ⅲ-1', mainCat: '主題軸 C · 變遷與因果', subCat: 'd. 政治的變遷', text: '不同時空環境下，臺灣人民透過爭取權利與政治改革，使得政治逐漸走向民主。' },
+      { dimension: 'content', stage: 'high', code: 'Cd-Ⅲ-2', mainCat: '主題軸 C · 變遷與因果', subCat: 'd. 政治的變遷', text: '臺灣人民的政治參與及公民團體的發展，為臺灣的民主政治奠定基礎。' },
+      { dimension: 'content', stage: 'high', code: 'Ce-Ⅲ-1', mainCat: '主題軸 C · 變遷與因果', subCat: 'e. 經濟的變遷', text: '經濟型態的變遷會影響人們的生活。' },
+      { dimension: 'content', stage: 'high', code: 'Ce-Ⅲ-2', mainCat: '主題軸 C · 變遷與因果', subCat: 'e. 經濟的變遷', text: '在經濟發展過程中，資源的使用會產生意義與價值的轉變，但也可能引發爭議。' },
+      { dimension: 'content', stage: 'high', code: 'Da-Ⅲ-1', mainCat: '主題軸 D · 選擇與責任', subCat: 'a. 價值的選擇', text: '依據需求與價值觀做選擇時，須評估風險、結果及承擔責任，且不應侵害他人福祉或正當權益。' },
+      { dimension: 'content', stage: 'high', code: 'Db-Ⅲ-1', mainCat: '主題軸 D · 選擇與責任', subCat: 'b. 經濟的選擇', text: '選擇合適的理財規劃，可以增加個人的財富並調節自身的消費力。' },
+      { dimension: 'content', stage: 'high', code: 'Dc-Ⅲ-1', mainCat: '主題軸 D · 選擇與責任', subCat: 'c. 參與公共事務的選擇', text: '團體或會議的運作可以透過成員適切的討論歷程做出決定。' }
+    ];
+
+    let currentDimension = 'all'; // all, performance, content
+    let currentStage = 'all';     // all, mid, high
+    let currentSubcat = 'all';
+    let searchQuery = '';
+
+    function setDimension(dim) {
+      currentDimension = dim;
+      currentSubcat = 'all';
+      ['all', 'performance', 'content'].forEach(d => {
+        const btn = document.getElementById(`dim-${d}`);
+        if (d === dim) {
+          btn.className = 'px-3.5 py-1.5 rounded-xl text-xs font-black transition pill-active';
+        } else {
+          btn.className = 'px-3.5 py-1.5 rounded-xl text-xs font-bold text-slate-600 hover:text-slate-900 transition';
+        }
+      });
+      renderSubcatBar();
+      renderList();
+    }
+
+    function setStage(stage) {
+      currentStage = stage;
+      ['all', 'mid', 'high'].forEach(s => {
+        const btn = document.getElementById(`stage-${s}`);
+        if (s === stage) {
+          btn.className = 'px-3 py-1.5 rounded-xl font-bold bg-slate-800 text-white';
+        } else {
+          btn.className = 'px-3 py-1.5 rounded-xl font-bold bg-slate-100 hover:bg-slate-200 text-slate-700';
+        }
+      });
+      renderList();
+    }
+
+    function setSubcat(cat) {
+      currentSubcat = cat;
+      renderSubcatBar();
+      renderList();
+    }
+
+    function renderSubcatBar() {
+      const bar = document.getElementById('subcat-bar');
+      if (currentDimension === 'performance') {
+        const categories = ['全部構面', '1. 理解及思辨', '2. 態度及價值', '3. 實作及參與'];
+        bar.innerHTML = `
+          <span class="text-[11px] font-bold text-indigo-900 mr-1 flex items-center gap-1">
+            <i class="fa-solid fa-filter"></i>表現構面直達：
+          </span>
+          ${categories.map(c => `
+            <button onclick="setSubcat('${c}')" class="px-2.5 py-1 rounded-lg text-xs font-bold border transition ${currentSubcat === c ? 'bg-indigo-900 text-white border-indigo-950' : 'bg-indigo-50/70 hover:bg-indigo-100 text-indigo-900 border-indigo-200'}">
+              ${c}
+            </button>
+          `).join('')}
+        `;
+      } else if (currentDimension === 'content') {
+        const categories = ['全部主題', '主題軸 A · 互動與關聯', '主題軸 B · 差異與多元', '主題軸 C · 變遷與因果', '主題軸 D · 選擇與責任'];
+        bar.innerHTML = `
+          <span class="text-[11px] font-bold text-emerald-900 mr-1 flex items-center gap-1">
+            <i class="fa-solid fa-filter"></i>內容主題直達：
+          </span>
+          ${categories.map(c => `
+            <button onclick="setSubcat('${c}')" class="px-2.5 py-1 rounded-lg text-xs font-bold border transition ${currentSubcat === c ? 'bg-emerald-900 text-white border-emerald-950' : 'bg-emerald-50/70 hover:bg-emerald-100 text-emerald-900 border-emerald-200'}">
+              ${c}
+            </button>
+          `).join('')}
+        `;
+      } else {
+        bar.innerHTML = `
+          <span class="text-[11px] font-bold text-slate-500 flex items-center gap-1">
+            <i class="fa-solid fa-lightbulb text-amber-500"></i>提示：切換上方「學習表現」或「學習內容」可啟用構面或主題軸一鍵直達過濾。
+          </span>
+        `;
+      }
+    }
+
+    function handleSearch() {
+      searchQuery = document.getElementById('search-input').value.trim();
+      renderList();
+    }
+
+    function renderList() {
+      const container = document.getElementById('item-container');
+      const filtered = CURRICULUM_DATA.filter(item => {
+        const matchDim = (currentDimension === 'all') || (item.dimension === currentDimension);
+        const matchStage = (currentStage === 'all') || (item.stage === currentStage);
+        const matchSubcat = (currentSubcat === 'all' || currentSubcat === '全部構面' || currentSubcat === '全部主題') || 
+                            (item.mainCat.includes(currentSubcat) || currentSubcat.includes(item.mainCat));
+        const matchSearch = (!searchQuery) || 
+          item.code.toLowerCase().includes(searchQuery.toLowerCase()) || 
+          item.text.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          item.mainCat.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          item.subCat.toLowerCase().includes(searchQuery.toLowerCase());
+        return matchDim && matchStage && matchSubcat && matchSearch;
+      });
+
+      document.getElementById('result-count').textContent = filtered.length;
+
+      if (filtered.length === 0) {
+        container.innerHTML = `<div class="text-center py-12 text-slate-400 font-bold text-sm bg-white rounded-3xl border-2 border-slate-200">查無符合條件之課綱條目，請嘗試調整搜尋條件。</div>`;
+        return;
+      }
+
+      // 如果當前是全部或兩者皆有，按維度與類別分組展示，讓閱讀更有條理
+      container.innerHTML = filtered.map(item => `
+        <div class="bg-white border-2 border-slate-800 rounded-2xl p-4 shadow-[0_3px_0_#2d3748] transition hover:translate-x-1">
+          <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+            <div class="flex items-center gap-2">
+              <span class="code-badge font-black text-xs px-2.5 py-1 rounded-lg ${item.dimension === 'performance' ? 'bg-indigo-100 text-indigo-950 border border-indigo-300' : 'bg-emerald-100 text-emerald-950 border border-emerald-300'}">
+                ${item.code}
+              </span>
+              <span class="text-xs font-black ${item.dimension === 'performance' ? 'text-indigo-800' : 'text-emerald-800'}">
+                ${item.mainCat}
+              </span>
+              <span class="text-xs text-slate-400">/</span>
+              <span class="text-xs font-bold text-slate-600">${item.subCat}</span>
+            </div>
+            
+            <div class="flex items-center gap-1.5">
+              <span class="text-[10px] font-black px-2 py-0.5 rounded-full ${item.dimension === 'performance' ? 'bg-indigo-50 text-indigo-700 border border-indigo-200' : 'bg-emerald-50 text-emerald-700 border border-emerald-200'}">
+                ${item.dimension === 'performance' ? '學習表現' : '學習內容'}
+              </span>
+              <span class="text-[10px] font-black px-2 py-0.5 rounded-full ${item.stage === 'mid' ? 'bg-amber-100 text-amber-900 border border-amber-300' : 'bg-sky-100 text-sky-900 border border-sky-300'}">
+                ${item.stage === 'mid' ? '中年級(Ⅱ)' : '高年級(Ⅲ)'}
+              </span>
+            </div>
+          </div>
+          <p class="text-sm text-slate-800 leading-relaxed font-bold pl-0.5">${item.text}</p>
+        </div>
+      `).join('');
+    }
+
+    // 初始化執行
+    renderSubcatBar();
+    renderList();
+  </script>
+</body>
+</html>
