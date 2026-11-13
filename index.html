@@ -164,6 +164,61 @@
       transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
     }
 
+    /* ==================== 手機端響應式全面優化 (Mobile Responsive) ==================== */
+    @media (max-width: 768px) {
+      /* 地圖舞台在手機上自適應高度與全寬，保留適度呼吸感 */
+      #island-stage {
+        width: 98vw !important;
+        aspect-ratio: 16 / 9;
+        max-height: calc(100vh - 110px);
+      }
+
+      /* 圓角在小螢幕縮小 */
+      .diorama-frame {
+        border-radius: 18px !important;
+        box-shadow: 0 10px 30px -10px rgba(15, 34, 64, 0.28), 0 0 0 2px #2d3748 !important;
+      }
+
+      /* 地標熱點標籤縮小 40%，防止重疊碰撞 */
+      .hotspot-badge {
+        padding: 2.5px 6.5px !important;
+        font-size: 9.5px !important;
+        gap: 3.5px !important;
+        border-width: 1.5px !important;
+        box-shadow: 0 2px 0 #2d3748 !important;
+        letter-spacing: 0 !important;
+      }
+
+      /* 圓點指示器微縮 */
+      .hotspot-badge > span:first-child {
+        width: 6.5px !important;
+        height: 6.5px !important;
+      }
+
+      /* 手機直式下暫時隱藏未開放的預留擴充槽位，大幅釋放核心 5 大地形視野 */
+      .expansion-slot {
+        display: none !important;
+      }
+
+      /* 抽屜在手機端全螢幕滑入 */
+      .drawer {
+        width: 100vw !important;
+      }
+    }
+
+    /* 手機橫向模式 (Landscape) 特別增強 */
+    @media (max-width: 900px) and (orientation: landscape) {
+      #island-stage {
+        width: auto !important;
+        height: 84vh !important;
+        aspect-ratio: 16 / 9;
+      }
+      .hotspot-badge {
+        padding: 3px 8px !important;
+        font-size: 10px !important;
+      }
+    }
+
     .drawer-closed {
       transform: translateX(105%);
       opacity: 0;
@@ -739,44 +794,53 @@
 </head>
 <body>
 
+  <!-- 手機直式旋轉建議提示條 (僅在手機直式螢幕顯示，可隨時點✕關閉) -->
+  <div id="mobile-rotate-tip" class="md:hidden fixed top-2 inset-x-3 z-50 pointer-events-auto bg-slate-900/90 text-amber-300 text-xs px-3.5 py-1.5 rounded-2xl border border-amber-400/40 shadow-lg flex items-center justify-between backdrop-blur-xs transition-all duration-300">
+    <div class="flex items-center gap-2">
+      <i class="fa-solid fa-mobile-screen-button rotate-90 text-amber-400 text-sm animate-pulse"></i>
+      <span class="text-[11px] font-bold">小提示：手機橫放體驗更遼闊的 3D 全景喔！</span>
+    </div>
+    <button onclick="document.getElementById('mobile-rotate-tip').style.display='none'" class="text-slate-400 hover:text-white px-2 py-0.5 rounded-lg text-sm font-black">✕</button>
+  </div>
+
   <!-- 頂部浮動標題列與導航條 -->
-  <header class="fixed top-5 left-5 right-5 z-30 pointer-events-none flex flex-wrap items-center justify-between gap-3">
+  <header class="fixed top-2 sm:top-5 left-2 sm:left-5 right-2 sm:right-5 z-30 pointer-events-none flex items-center justify-between gap-1.5 sm:gap-3">
     <!-- 主題徽章 -->
-    <div class="pointer-events-auto bg-white border-2 border-slate-800 rounded-3xl px-5 py-3 shadow-[0_5px_0_#2d3748] flex items-center space-x-3.5">
-      <div class="w-11 h-11 rounded-2xl bg-amber-400 border-2 border-slate-800 flex items-center justify-center text-slate-900 shadow-xs">
-        <i class="fa-solid fa-mountain-sun text-lg"></i>
+    <div class="pointer-events-auto bg-white border-2 border-slate-800 rounded-2xl sm:rounded-3xl px-2.5 sm:px-5 py-1.5 sm:py-3 shadow-[0_3px_0_#2d3748] sm:shadow-[0_5px_0_#2d3748] flex items-center space-x-2 sm:space-x-3.5">
+      <div class="w-7 h-7 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl bg-amber-400 border-2 border-slate-800 flex items-center justify-center text-slate-900 shadow-xs shrink-0">
+        <i class="fa-solid fa-mountain-sun text-xs sm:text-lg"></i>
       </div>
       <div>
-        <div class="text-[11px] font-black tracking-wider text-amber-700 uppercase">臺灣本島形狀 × 五大地形</div>
-        <h1 class="text-xl font-black text-slate-800 tracking-tight mt-0.5">國小社會領域 AI 備課島</h1>
+        <div class="hidden sm:block text-[11px] font-black tracking-wider text-amber-700 uppercase">臺灣本島形狀 × 五大地形</div>
+        <h1 class="text-xs sm:text-xl font-black text-slate-800 tracking-tight">國小社會領域 AI 備課島</h1>
       </div>
     </div>
 
-    <!-- 右上角工具列 -->
-    <div class="pointer-events-auto flex items-center gap-2">
+    <!-- 右上角工具列 (手機端精簡為緊湊按鈕，電腦端完整展示) -->
+    <div class="pointer-events-auto flex items-center gap-1 sm:gap-2">
       <!-- 通關進度提示按鈕 -->
-      <button onclick="toggleProgressInfo()" class="btn-pop px-3.5 py-2.5 rounded-2xl text-xs font-black text-slate-800 flex items-center gap-1.5" title="檢視通關解鎖進度">
-        <i class="fa-solid fa-trophy text-amber-500 text-sm"></i>
-        <span>通關進度：<span id="header-progress-text" class="text-indigo-600">0/2</span></span>
+      <button onclick="toggleProgressInfo()" class="btn-pop px-2 sm:px-3.5 py-1.5 sm:py-2.5 rounded-xl sm:rounded-2xl text-[10px] sm:text-xs font-black text-slate-800 flex items-center gap-1" title="檢視通關解鎖進度">
+        <i class="fa-solid fa-trophy text-amber-500 text-xs sm:text-sm"></i>
+        <span class="hidden sm:inline">通關進度：</span><span id="header-progress-text" class="text-indigo-600">0/2</span>
       </button>
 
       <!-- 島嶼動態切換按鈕 -->
-      <button id="toggle-motion" onclick="toggleIslandMotion()" class="btn-pop px-3.5 py-2.5 rounded-2xl text-xs font-black text-slate-800 flex items-center gap-1.5" title="切換島上人車移動動態">
-        <i class="fa-solid fa-person-walking text-indigo-600 text-sm"></i>
-        <span>島嶼動態：<span id="motion-status" class="text-emerald-600">已啟動</span></span>
+      <button id="toggle-motion" onclick="toggleIslandMotion()" class="btn-pop px-2 sm:px-3.5 py-1.5 sm:py-2.5 rounded-xl sm:rounded-2xl text-[10px] sm:text-xs font-black text-slate-800 flex items-center gap-1" title="切換島上人車移動動態">
+        <i class="fa-solid fa-person-walking text-indigo-600 text-xs sm:text-sm"></i>
+        <span class="hidden md:inline">島嶼動態：<span id="motion-status" class="text-emerald-600">已啟動</span></span>
       </button>
 
       <!-- 擴充槽位切換按鈕 -->
-      <button id="toggle-expansion" onclick="toggleExpansionSlots()" class="btn-pop px-3.5 py-2.5 rounded-2xl text-xs font-black text-slate-800 flex items-center gap-1.5" title="切換顯示預留擴充地塊">
-        <i class="fa-solid fa-puzzle-piece text-amber-600 text-sm"></i>
-        <span>未來擴充槽：<span id="expansion-status" class="text-emerald-600">已開啟</span></span>
+      <button id="toggle-expansion" onclick="toggleExpansionSlots()" class="btn-pop px-2 sm:px-3.5 py-1.5 sm:py-2.5 rounded-xl sm:rounded-2xl text-[10px] sm:text-xs font-black text-slate-800 flex items-center gap-1" title="切換顯示預留擴充地塊">
+        <i class="fa-solid fa-puzzle-piece text-amber-600 text-xs sm:text-sm"></i>
+        <span class="hidden md:inline">未來擴充槽：<span id="expansion-status" class="text-emerald-600">已開啟</span></span>
       </button>
     </div>
   </header>
 
 
-  <!-- 左下角導覽提示與快速跳轉 -->
-  <aside class="fixed bottom-6 left-6 z-20 flex flex-col gap-2.5 pointer-events-none">
+  <!-- 電腦端：左下角導覽提示與快速跳轉 (在平板與手機隱藏，避免遮擋地圖) -->
+  <aside class="hidden md:flex fixed bottom-6 left-6 z-20 flex-col gap-2.5 pointer-events-none">
     <div class="pointer-events-auto bg-white border-2 border-slate-800 rounded-3xl p-3.5 shadow-[0_5px_0_#2d3748] flex flex-col gap-1.5 text-xs">
       <div class="px-2 py-1 text-[11px] font-black tracking-wider text-slate-400 uppercase flex items-center justify-between border-b-2 border-slate-100 pb-2 mb-1">
         <span class="text-slate-800 font-extrabold flex items-center gap-1.5">
@@ -809,6 +873,41 @@
       <span>點擊島嶼站點探索教材條目，觀察島上人車生活</span>
     </div>
   </aside>
+
+  <!-- 手機端專屬：左下角折疊式「🗺️ 地形導覽」懸浮浮動按鈕與彈出選單 (完全不擋中央地圖) -->
+  <div class="md:hidden fixed bottom-3 left-3 z-30 pointer-events-auto flex flex-col items-start gap-2">
+    <!-- 折疊彈出的地形選單卡片 (預設隱藏) -->
+    <div id="mobile-terrain-sheet" class="hidden bg-white/95 backdrop-blur-xs border-2 border-slate-800 rounded-2xl p-2.5 shadow-[0_4px_0_#2d3748] flex flex-col gap-1.5 text-xs w-[240px]">
+      <div class="text-[10px] font-black text-slate-500 border-b border-slate-200 pb-1 flex justify-between items-center">
+        <span>快速跳轉地形站點</span>
+        <button onclick="toggleMobileTerrainMenu()" class="text-slate-400 hover:text-slate-800 px-1 font-bold">✕</button>
+      </div>
+      <div class="grid grid-cols-2 gap-1.5">
+        <button onclick="openNodeDrawer('prep-center'); toggleMobileTerrainMenu();" class="px-2 py-1.5 rounded-lg text-left bg-amber-50 border border-amber-300 font-bold text-slate-800 flex items-center gap-1 text-[11px]">
+          <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+          <span>盆地 · 提問</span>
+        </button>
+        <button onclick="openNodeDrawer('worksheet-forge'); toggleMobileTerrainMenu();" class="px-2 py-1.5 rounded-lg text-left bg-emerald-50 border border-emerald-300 font-bold text-slate-800 flex items-center gap-1 text-[11px]">
+          <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+          <span>台地 · 學習單</span>
+        </button>
+        <button onclick="openNodeDrawer('core-navigator'); toggleMobileTerrainMenu();" class="px-2 py-1.5 rounded-lg text-left bg-indigo-50 border border-indigo-300 font-bold text-slate-800 flex items-center gap-1 text-[11px]">
+          <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+          <span>高山 · 領綱</span>
+        </button>
+        <button onclick="openNodeDrawer('inquiry-hills'); toggleMobileTerrainMenu();" class="px-2 py-1.5 rounded-lg text-left bg-lime-50 border border-lime-300 font-bold text-slate-800 flex items-center gap-1 text-[11px]">
+          <span class="w-2 h-2 rounded-full bg-lime-500"></span>
+          <span>丘陵 · 策略</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 浮動呼叫膠囊按鈕 -->
+    <button onclick="toggleMobileTerrainMenu()" class="btn-pop px-3 py-1.5 rounded-xl text-xs font-black text-slate-800 bg-white flex items-center gap-1.5 shadow-[0_3px_0_#2d3748]">
+      <i class="fa-solid fa-map-location-dot text-amber-500"></i>
+      <span>五大地形導覽</span>
+    </button>
+  </div>
 
 
   <!-- 3D 浮動主舞台 -->
@@ -1890,6 +1989,14 @@
 
       document.getElementById('info-drawer').classList.remove('drawer-closed');
       document.getElementById('info-drawer').classList.add('drawer-open');
+    }
+
+    // 手機端地形快速跳轉選單開關
+    function toggleMobileTerrainMenu() {
+      const sheet = document.getElementById('mobile-terrain-sheet');
+      if (sheet) {
+        sheet.classList.toggle('hidden');
+      }
     }
 
     // 備課島雙軌通關進度總覽抽屜
